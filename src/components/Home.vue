@@ -4,50 +4,50 @@
       <li>
         <router-link
           @click.native="total = 856"
-          :class=" $route.fullPath === '/' || $route.fullPath==='/?tab=all' ? 'active' : ''"
-          to="/?tab=all"
+          :class=" $route.fullPath === $publicUrl+'/' || $route.fullPath===$publicUrl+'/?tab=all' ? 'active' : ''"
+          :to="this.$publicUrl+'/?tab=all'"
         >全部</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 15"
-          :class="$route.fullPath==='/?tab=good' ? 'active' : ''"
-          to="/?tab=good"
+          :class="$route.fullPath===$publicUrl+'/?tab=good' ? 'active' : ''"
+          :to="this.$publicUrl+'/?tab=good'"
         >精华</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 3"
-          :class="$route.fullPath==='/?tab=weex' ? 'active' : ''"
-          to="/?tab=weex"
+          :class="$route.fullPath===$publicUrl+'/?tab=weex' ? 'active' : ''"
+          :to="$publicUrl+'/?tab=weex'"
         >weex</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 247"
-          :class="$route.fullPath==='/?tab=share' ? 'active' : ''"
-          to="/?tab=share"
+          :class="$route.fullPath===$publicUrl+'/?tab=share' ? 'active' : ''"
+          :to="$publicUrl+'/?tab=share'"
         >分享</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 577"
-          :class="$route.fullPath==='/?tab=ask' ? 'active' : ''"
-          to="/?tab=ask"
+          :class="$route.fullPath===$publicUrl+'/?tab=ask' ? 'active' : ''"
+          :to="$publicUrl+'/?tab=ask'"
         >问答</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 30"
-          :class="$route.fullPath==='/?tab=job' ? 'active' : ''"
-          to="/?tab=job"
+          :class="$route.fullPath===$publicUrl+'/?tab=job' ? 'active' : ''"
+          :to="$publicUrl+'/?tab=job'"
         >招聘</router-link>
       </li>
     </ul>
     <div class="content">
       <ul v-if="topics.length">
         <li v-for="topic in topics" :key="topic.id">
-          <router-link :to="`/user/${topic.author.loginname}`">
+          <router-link :to="`${$publicUrl}/user/${topic.author.loginname}`">
             <img :style="{width:'30px',height:'30px'}" :src="topic.author.avatar_url" alt />
           </router-link>
           <div class="count">
@@ -117,7 +117,7 @@ export default {
       // 页面改变触发的函数
       // 更改页面的地址 从而触发 watch 的 handler 从而实现页面数据的变化
       const tab = this.$route.query.tab || "all";
-      this.$router.push(`/?tab=${tab}&page=${num}`);
+      this.$router.push(`${this.$publicUrl}/?tab=${tab}&page=${num}`);
     }
   }
 };

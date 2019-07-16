@@ -1,22 +1,13 @@
 <template>
-  <div
-    class="user"
-    v-if="user"
-  >
+  <div class="user" v-if="user">
     <div class="panel">
       <div class="head">
-        <router-link
-          to="/"
-          class="head-home"
-        >主页</router-link>
+        <router-link :to="$publicUrl+'/'" class="head-home">主页</router-link>
         <span>/</span>
       </div>
       <div class="userinfo">
         <div>
-          <img
-            :src="user.avatar_url"
-            alt
-          />
+          <img :src="user.avatar_url" alt />
           <span>{{user.loginname}}</span>
         </div>
         <div>{{user.score}} 积分</div>
@@ -25,67 +16,41 @@
     </div>
     <div class="panel">
       <div class="head">最近创建的话题</div>
-      <div
-        class="cell"
-        v-for="recent_topic in user.recent_topics"
-        :key="recent_topic.id"
-      >
-        <router-link :to="`/user/${recent_topic.author.loginname}`">
-          <img
-            :src="recent_topic.author.avatar_url"
-            alt
-          />
+      <div class="cell" v-for="recent_topic in user.recent_topics" :key="recent_topic.id">
+        <router-link :to="`${$publicUrl}/user/${recent_topic.author.loginname}`">
+          <img :src="recent_topic.author.avatar_url" alt />
         </router-link>
         <!-- <div class="count">
           <span class="reply-count">{{recent_topic.reply_count}}</span>/
           <span class="visit-count">{{recent_topic.visit_count}}</span>
         </div>-->
         <router-link
-          :to="`/topics/${recent_topic.id}`"
+          :to="`${$publicUrl}/topics/${recent_topic.id}`"
           class="title"
         >{{recent_topic.title}}</router-link>
         <span class="time">{{myMomentTime(recent_topic.last_reply_at)}}</span>
       </div>
-      <div
-        class="cell more"
-        v-if="user.recent_topics.length"
-      >查看更多》</div>
-      <div
-        class="cell more"
-        v-else
-      >无话题</div>
+      <div class="cell more" v-if="user.recent_topics.length">查看更多》</div>
+      <div class="cell more" v-else>无话题</div>
     </div>
     <div class="panel">
       <div class="head">最近参与的话题</div>
-      <div
-        class="cell"
-        v-for="recent_replie in user.recent_replies"
-        :key="recent_replie.id"
-      >
-        <router-link :to="`/user/${recent_replie.author.loginname}`">
-          <img
-            :src="recent_replie.author.avatar_url"
-            alt
-          />
+      <div class="cell" v-for="recent_replie in user.recent_replies" :key="recent_replie.id">
+        <router-link :to="`${$publicUrl}/user/${recent_replie.author.loginname}`">
+          <img :src="recent_replie.author.avatar_url" alt />
         </router-link>
         <!-- <div class="count">
           <span class="reply-count">{{recent_replie.reply_count}}</span>/
           <span class="visit-count">{{recent_replie.visit_count}}</span>
         </div>-->
         <router-link
-          :to="`/topics/${recent_replie.id}`"
+          :to="`${$publicUrl}/topics/${recent_replie.id}`"
           class="title"
         >{{recent_replie.title}}</router-link>
         <span class="time">{{myMomentTime(recent_replie.last_reply_at)}}</span>
       </div>
-      <div
-        class="cell more"
-        v-if="user.recent_replies.length"
-      >查看更多》</div>
-      <div
-        class="cell more"
-        v-else
-      >无话题</div>
+      <div class="cell more" v-if="user.recent_replies.length">查看更多》</div>
+      <div class="cell more" v-else>无话题</div>
     </div>
   </div>
 </template>
